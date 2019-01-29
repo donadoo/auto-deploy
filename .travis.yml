@@ -19,12 +19,13 @@ android:
   - google-gdk-license-.+
 before_install:
 - yes | sdkmanager "platforms;android-27"
+- openssl aes-256-cbc -K $encrypted_cbceba7650e1_key -iv $encrypted_cbceba7650e1_iv -in android-deploy.jks.enc -out keystore/android-deploy.jks -d
 scripts:
 - "./gradlew assembleRelease"
 deploy:
   provider: releases
   api_key:
-    secure: qA2H2XEVe/TTO06wVGn5ctot2jFS7Kz+TXNWgoljvv5fL9BZtS5AbAfYcRJhc1Bsn2O6t/OHSo7eGBmj45on6U8KGNJtcRT1vZC7aNpM7XqMJqlpX7XdK45jnohF3lWUmkUtSbKRyLgHu4mnB52orQWQoLwoUB+Y2L3HdsuNec+xMqFYxcMZq/GkzIrom48A52dPe2IKccyGJZj/jmEAwCIme6Pt4M8pQuuxsWhGgS9P1ztZSxlql/UOJcc5XqQzc7OsNHjvd8WpbgBCWCeYakW6xk4D4rrCE5GyRUbKl2uzBtgb2C0RB/mQlmCm7PNwPgbSejAfUomNUGPJY2W29W7EKDlg+TgDraG+UNF1/bnLNF2jO/dBuAV/kvknH0uYjInXnBg1pkOUG3U1amUaPDcBEx0pVfBZECUQFQK/Q1JcGgQf/mt+H1qmxFo7XgeCn9TRJ9r9H1bpjLQZji1CI/Ol/bx2lga9sld1CiK5UX+nin1vjH2Pi2DiFd7UPc3NCLRphHfItl2jpX6NloYizKyrtmAX7YznbJQi0KaU3PMAUzMlQWEDiaHMlcodLe+CkBQyFNbko2Cf2Nu8SZclN8ZMU1VN+bmwHIhPY03cyjeRm1ASrBbUy6DIhvmHOxs7teJn3TlYPWuYFEGEpCvmJrOKAtZ9j3J7dnIvsd94upA=
+    secure: ${GH_TOKEN}
   file: app/build/outputs/apk/debug/app-debug.apk
   skip_cleanup: true
   on:
